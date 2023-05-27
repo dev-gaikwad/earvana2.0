@@ -27,9 +27,7 @@ mongoose
   .then(() => {
     console.log('MongoDB Connected');
     app.listen(process.env.PORT, () => {
-      console.log('Server running from not api...');
+      console.log('Server running ...');
     });
   })
   .catch((err) => console.log(error));
-
-module.exports = app;

@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "server for earvana ecommerce webapp",
-  "main": "/api/index.js",
+  "main": "index.js",
   "engines": {
     "node": "14.x"
   },
