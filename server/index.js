@@ -31,3 +31,5 @@ mongoose
     });
   })
   .catch((err) => console.log(error));
+
+module.exports = app;
