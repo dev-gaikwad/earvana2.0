@@ -1,0 +1,89 @@
+.form-card {
+  max-width: 600px;
+  margin: 5rem auto;
+}
+
+.email-input,
+.name-input,
+.password-input,
+.textarea {
+  box-shadow: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--x-light-secondary-color);
+  height: 3rem;
+  width: 100%;
+  outline: none;
+  font-family: inherit;
+  padding: 0 1rem 0rem 3rem;
+  font-size: 1rem;
+  color: var(--secondary-color);
+}
+
+.password-input {
+  border: none;
+  padding: 0rem 1rem 0rem 3rem;
+}
+
+input::placeholder {
+  font-weight: normal;
+  color: var(--x-light-secondary-color);
+}
+
+.name-input {
+  margin-bottom: 2rem;
+  background: url('../../public/svg/badge.svg') 2.5% center no-repeat;
+}
+
+.email-input {
+  margin-bottom: 2rem;
+  background: url('../../public/svg/person.svg') 2.5% center no-repeat;
+}
+
+.password-container {
+  border: 1px solid var(--x-light-secondary-color);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.password-input {
+  background: url('../../public/svg/lock.svg') 2.5% center no-repeat;
+}
+
+.show-password {
+  cursor: pointer;
+  padding: 0.5rem 0.5rem 0.5rem 0rem;
+}
+
+.forgot-password-link {
+  display: block;
+  cursor: pointer;
+  color: var(--lighter-secondary-color);
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.sign-btn {
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  padding: 0.5rem;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.alternate-option-container {
+  text-align: center;
+}
+
+.link {
+  color: var(--primary-color);
+  text-decoration: none;
+  text-align: center;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

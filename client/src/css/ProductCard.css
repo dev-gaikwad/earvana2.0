@@ -1,0 +1,106 @@
+.product-card {
+  width: 300px;
+  height: 440px;
+  background-color: var(--white);
+  /* box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.2); */
+  border: 0.5px solid rgb(226, 226, 226);
+  margin: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.product-image img {
+  width: 280px;
+  height: 280px;
+}
+
+.product-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-brand {
+  font-size: 0.75rem;
+  color: var(--x-light-secondary-color);
+}
+
+.product-category {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.product-category p {
+  margin: 0.25rem 0rem;
+  font-size: 0.75rem;
+  border: 0.5px solid var(--x-light-secondary-color);
+  padding: 0.25rem;
+}
+
+.product-name {
+  white-space: nowrap;
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.product-name h3 {
+  margin: 0.25rem 0rem;
+}
+
+.product-price-rating-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.5px solid lightgray;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-price {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: Helvetica, sans-serif;
+}
+
+.selling-price {
+  padding: 0.25rem 0.5rem 0.25rem 0rem;
+  font-weight: bold;
+}
+
+.selling-price::before {
+  content: '\20B9';
+  font-weight: bold;
+}
+
+.original-price {
+  font-size: 0.9rem;
+  color: var(--x-light-secondary-color);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent1-color);
+}
+
+.product-rating {
+  width: 2rem;
+  font-size: 0.75rem;
+  padding: 0.25rem;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+}
+.high-rating {
+  border: 1px solid var(--accent2-color);
+  background-color: var(--accent2-color);
+  color: var(--white);
+}
+.medium-rating {
+  border: 1px solid var(--primary-contrast-color);
+  background-color: var(--primary-contrast-color);
+  color: var(--white);
+}
+
+.product-card-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}

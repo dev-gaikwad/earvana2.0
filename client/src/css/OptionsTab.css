@@ -1,0 +1,42 @@
+.options-tab-container {
+  width: 20%;
+  min-height: 70vh;
+  max-height: 91vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--x-light-primary-color);
+  border-right: 1px solid rgb(226, 226, 226);
+}
+
+.option-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.option-container h3 {
+  text-align: center;
+}
+
+.option {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input {
+  box-shadow: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--x-light-secondary-color);
+  height: 2rem;
+  max-width: 100%;
+  outline: none;
+  font-family: inherit;
+  padding: 0 0.75rem 0rem 0.75rem;
+  font-size: 1rem;
+  color: var(--secondary-color);
+}
+
+.option .category-name,
+.accessory-name {
+  text-transform: capitalize;
+}

@@ -1,0 +1,12 @@
+.product-description-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 80vh;
+  margin: auto;
+}
+
+.description-content-container {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,21 @@
+footer {
+  position: relative;
+  padding: 1rem;
+}
+.socials-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.socials-section svg {
+  cursor: pointer;
+}
+
+.socials-section svg:hover {
+  fill: var(--primary-color);
+}
+
+.copyrights-section {
+  text-align: center;
+  cursor: default;
+}

@@ -1,0 +1,25 @@
+.category-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 1rem;
+  width: 150px;
+  height: 175px;
+  box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.2);
+  margin: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.category-card:hover {
+  color: var(--primary-color);
+  font-weight: bold;
+  transform: scale(110%);
+}
+
+.category-card-description {
+  justify-content: baseline;
+  height: 58px;
+  text-align: center;
+}

@@ -1,0 +1,135 @@
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 91vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../public/images/banner02.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.hero-content {
+  background-color: rgba(0, 0, 0, 0, 50%);
+  position: absolute;
+  left: 2rem;
+  top: 10rem;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  text-align: center;
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: default;
+}
+
+.hero-content h1 {
+  background: linear-gradient(
+    to right,
+    var(--accent1-color) 0%,
+    var(--lighter-primary-color) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  max-width: 300px;
+  text-align: left;
+  animation: 2s pop-up-title ease-out;
+}
+
+@keyframes pop-up-title {
+  0% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.75;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+.hero-button {
+  width: 7rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--primary-contrast-color);
+  border: none;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  animation: 2s pop-down-button ease-out;
+}
+@keyframes pop-down-button {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+.hero-button:hover {
+  opacity: 0.9;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+}
+.hero-title {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.hero-subtitle {
+  font-size: 2rem;
+  font-weight: 200;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../public/images/sm-banner02.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+  .hero-content {
+    top: 2rem;
+  }
+}
