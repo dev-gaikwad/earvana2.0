@@ -5,10 +5,10 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './.env' });
 
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-const productRoutes = require('./routes/productRoutes');
-const authorize = require('./jwtAuthouriser');
+const authRoutes = require('../routes/authRoutes');
+const userRoutes = require('../routes/userRoutes');
+const productRoutes = require('../routes/productRoutes');
+const authorize = require('../jwtAuthouriser');
 
 const app = express();
 app.use(cors());
