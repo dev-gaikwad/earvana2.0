@@ -22,31 +22,37 @@ const CategoryListSection = () => {
           <CategoryCard
             SVGIcon={WiredEarphonesIcon}
             description='In-Ear Wired Earphones'
+            accessory={'audioset'}
             categories={['in_ear', 'wired']}
           />
           <CategoryCard
             SVGIcon={WiredHeadphonesIcon}
             description='Over-the-Ear Wired Headphones'
+            accessory={'audioset'}
             categories={['over_ear', 'wired']}
           />
           <CategoryCard
             SVGIcon={WirelessEarphonesIcon}
             description='In-Ear Wireless Earphones'
+            accessory={'audioset'}
             categories={['in_ear', 'wireless']}
           />
           <CategoryCard
             SVGIcon={WirelessHeadphonesIcon}
             description='Over-the-Ear Wireless Headphones'
+            accessory={'audioset'}
             categories={['over_ear', 'wireless']}
           />
           <CategoryCard
             SVGIcon={AmplifierIcon}
             description='Amplifiers & DACs'
+            accessory={'tools'}
             categories={['tools']}
           />
           <CategoryCard
             SVGIcon={CablesIcon}
             description='Cables'
+            accessory={'cables'}
             categories={['cables']}
           />
           <CategoryCard SVGIcon={ArrowRightBtn} description='Browse All' />

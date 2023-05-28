@@ -4,17 +4,25 @@ import '../../css/CategoryCard.css';
 import { ProductContext } from '../../context/ProductContext';
 import { useNavigate } from 'react-router-dom';
 
-const CategoryCard = ({ SVGIcon, description, categories }) => {
+const CategoryCard = ({ SVGIcon, description, accessory, categories }) => {
   const navigate = useNavigate();
   const { dispatch } = useContext(ProductContext);
 
   const categoryCardClickHandler = () => {
     dispatch({ type: 'CLEAR_ALL' });
-    if (categories) {
-      categories.map((category) =>
-        dispatch({ type: 'FILTER_BY_CATEGORIES', payload: category })
-      );
+    if (accessory) {
+      if (accessory !== 'audioset') {
+        dispatch({ type: 'FILTER_BY_ACCESSORIES', payload: accessory });
+      } else {
+        dispatch({ type: 'FILTER_BY_ACCESSORIES', payload: accessory });
+        if (categories) {
+          categories.map((category) =>
+            dispatch({ type: 'FILTER_BY_CATEGORIES', payload: category })
+          );
+        }
+      }
     }
+
     navigate('/products');
   };
 

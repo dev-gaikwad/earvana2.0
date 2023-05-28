@@ -1,0 +1,33 @@
+.sm-filter-tab-container {
+  height: 91vh;
+  width: 100vw;
+  background-color: var(--x-light-primary-color);
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  animation: filterstab-in-bottom 0.5s;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.sm-filter-tab-header {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.sm-filter-tab-header h4 {
+  text-transform: capitalize;
+}
+.filter-tab-close-button {
+  cursor: pointer;
+}
+
+@keyframes filterstab-in-bottom {
+  from {
+    transform: translatey(100%);
+  }
+  to {
+    transform: translatey(0);
+  }
+}

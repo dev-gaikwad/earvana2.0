@@ -1,21 +1,18 @@
 import React, { useContext } from 'react';
-import '../../css/OptionsTab.css';
+import '../../css/Filters.css';
 import { ProductContext } from '../../context/ProductContext';
 
-const categoryList = ['in_ear', 'over_ear', 'wired', 'wireless'];
-
-const accessoriesList = ['audioset', 'players', 'tools', 'cables'];
-
-const OptionsTab = () => {
-  const { state, dispatch } = useContext(ProductContext);
+const FiltersSidebar = () => {
+  const { state, dispatch, categoryList, accessoriesList } =
+    useContext(ProductContext);
 
   return (
-    <div className='options-tab-container'>
+    <div className='filters-content-tab'>
       <div className='tab-content'>
-        <div className='option-container'>
+        <div className='filter-container'>
           <h3>Search</h3>
-          <div className='options-list'>
-            <div className='option'>
+          <div className='filters-list'>
+            <div className='filter'>
               <input
                 className='search-input'
                 name='search'
@@ -28,22 +25,11 @@ const OptionsTab = () => {
             </div>
           </div>
         </div>
-        <div className='option-container'>
+        <div className='filter-container'>
           <h3>Filter By</h3>
-          <div className='options-list'>
-            {/* <div className='option'>
-              <label htmlFor='priceRange'>Price</label>
-              <input
-                className='price-range-input'
-                type='range'
-                id='priceRange'
-                min={0}
-                max={100000}
-                step={10000}
-              />
-            </div> */}
-            <div className='option'>
-              <label>Audiophile Accessories</label>
+          <div className='filters-list'>
+            <div className='filter'>
+              <p>Accessories</p>
               {accessoriesList.map((accessory, index) => (
                 <label
                   key={index}
@@ -65,8 +51,8 @@ const OptionsTab = () => {
                 </label>
               ))}
               {state.filters.accessory === 'audioset' && (
-                <div className='option'>
-                  <label>Headphone Category</label>
+                <div className='filter'>
+                  <p>Category</p>
                   {categoryList.map((category, index) => (
                     <label
                       key={index}
@@ -90,24 +76,21 @@ const OptionsTab = () => {
                 </div>
               )}
             </div>
-            <div className='option'>
-              <label htmlFor='ratings'>Ratings</label>
-              <p>
-                {state.filters.rating
-                  ? `${state.filters.rating} ${
-                      state.filters.rating < 5 ? '+' : ''
-                    }`
-                  : 5}
-              </p>
+            <div className='filter'>
+              <label htmlFor='ratings'>
+                Ratings{' '}
+                {state.filters.rating ? `${state.filters.rating} +` : ''}
+              </label>
+
               <input
                 id='ratings'
                 className='ratings'
                 name='ratings'
                 type='range'
                 min={1}
-                max={5}
+                max={4}
                 step={1}
-                defaultValue={5}
+                defaultValue={1}
                 list='rating-markers'
                 onChange={(e) =>
                   dispatch({
@@ -119,10 +102,10 @@ const OptionsTab = () => {
             </div>
           </div>
         </div>
-        <div className='option-container'>
+        <div className='filter-container'>
           <h3>Sort By</h3>
-          <div className='options-list'>
-            <div className='option'>
+          <div className='filters-list'>
+            <div className='filter'>
               <label htmlFor='H2L'>
                 <input
                   type='radio'
@@ -161,4 +144,4 @@ const OptionsTab = () => {
   );
 };
 
-export default OptionsTab;
+export default FiltersSidebar;

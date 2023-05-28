@@ -12,8 +12,13 @@ export const ProductContext = createContext();
 export const ProductContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(productReducer, initialState);
   const [allProducts, setAllProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const categoryList = ['in_ear', 'over_ear', 'wired', 'wireless'];
+  const accessoriesList = ['audioset', 'players', 'tools', 'cables'];
 
   const getAllProducts = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/product`
@@ -25,6 +30,8 @@ export const ProductContextProvider = ({ children }) => {
       setAllProducts(response.data);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -59,7 +66,10 @@ export const ProductContextProvider = ({ children }) => {
         dispatch,
         getAllProducts,
         allProducts,
+        isLoading,
         filterAndSortProducts,
+        categoryList,
+        accessoriesList,
       }}
     >
       {children}

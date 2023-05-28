@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import OptionsTab from '../components/layout/OptionsTab';
+import FiltersSidebar from '../components/layout/FiltersSidebar';
 import ProductsSection from '../components/layout/ProductsSection';
 import { ProductContext } from '../context/ProductContext';
 
@@ -14,7 +14,9 @@ const ProductListingPage = () => {
   }, []);
   return (
     <div className='productlisting-page-container'>
-      <OptionsTab />
+      <div className='lg-filters-tab-container'>
+        <FiltersSidebar />
+      </div>
       <ProductsSection />
     </div>
   );
