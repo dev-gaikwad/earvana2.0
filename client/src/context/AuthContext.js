@@ -33,6 +33,7 @@ export const AuthServiceProvider = ({ children }) => {
     localStorage.removeItem('token');
     setToken(null);
     setUser(false);
+    toast.info('Logged out successfully');
   };
 
   const signUp = async (username, email, password) => {

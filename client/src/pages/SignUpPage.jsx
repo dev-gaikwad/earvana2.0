@@ -10,12 +10,14 @@ const SignUpPage = () => {
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
 
   const auth = useAuth();
 
-  const { username, email, password } = registerData;
+  const { username, email, password, confirmPassword } = registerData;
 
   const registerDataChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -37,8 +39,12 @@ const SignUpPage = () => {
 
   const registerFormSubmitHandler = async (event) => {
     event.preventDefault();
-    if (username && email && password) {
-      auth.signUp(username, email, password);
+    if (username && email && password && confirmPassword) {
+      if (confirmPassword === password) {
+        auth.signUp(username, email, password);
+      } else {
+        toast.error('Passwords do not match');
+      }
     } else {
       toast.error('Data should be atleast 3 charachters');
     }
@@ -78,6 +84,36 @@ const SignUpPage = () => {
               onClick={() => setShowPassword((prev) => !prev)}
             >
               {showPassword ? (
+                <VisibilityIcon
+                  width='30px'
+                  height='30px'
+                  fill='var(--x-light-secondary-color)'
+                />
+              ) : (
+                <InvisibleIcon
+                  width='30px'
+                  height='30px'
+                  fill='var(--x-light-secondary-color)'
+                />
+              )}
+            </div>
+          </div>
+
+          <div className='password-container'>
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              className='password-input'
+              name='confirmPassword'
+              placeholder='Confirm Password'
+              required
+              onChange={registerDataChangeHandler}
+            />
+
+            <div
+              className='show-password'
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+            >
+              {showConfirmPassword ? (
                 <VisibilityIcon
                   width='30px'
                   height='30px'

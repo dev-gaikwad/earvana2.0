@@ -6,7 +6,7 @@ import Header from './components/Header';
 import ExplorePage from './pages/ExplorePage';
 import ProfilePage from './pages/ProfilePage';
 import SignInPage from './pages/SignInPage';
-// import CartPage from './pages/CartPage';
+import CartPage from './pages/CartPage';
 import SignUpPage from './pages/SignUpPage';
 import Footer from './components/layout/Footer';
 import { AuthServiceProvider } from './context/AuthContext';
@@ -28,7 +28,7 @@ function App() {
                 <Route path='/' element={<ExplorePage />} />
                 <Route path='/profile' element={<ProfilePage />} />
                 <Route path='/signin' element={<SignInPage />} />
-                <Route path='/cart' element={<SignUpPage />} />
+                <Route path='/cart' element={<CartPage />} />
                 <Route path='/signup' element={<SignUpPage />} />
                 <Route path='/products' element={<ProductListingPage />} />
                 <Route
