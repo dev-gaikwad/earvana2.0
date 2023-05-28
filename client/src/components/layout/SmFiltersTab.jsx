@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import '../../css/SmFiltersTab.css';
 import FiltersSidebar from './FiltersSidebar';
 import { CloseButtonIcon } from '../../utils/svg/SVGIcons';

@@ -1,0 +1,15 @@
+.cart-page-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cart-info-section {
+  width: 70vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}

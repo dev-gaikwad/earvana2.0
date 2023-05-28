@@ -15,31 +15,34 @@ import ProductListingPage from './pages/ProductListingPage';
 import DataAdder from './components/DataAdder';
 import { ProductContextProvider } from './context/ProductContext';
 import ProductDescriptionPage from './pages/ProductDescriptionPage';
+import { UserContextProvider } from './context/UserContext';
 
 function App() {
   return (
     <>
       <Router>
         <AuthServiceProvider>
-          <ProductContextProvider>
-            <Header />
-            <main>
-              <Routes>
-                <Route path='/' element={<ExplorePage />} />
-                <Route path='/profile' element={<ProfilePage />} />
-                <Route path='/signin' element={<SignInPage />} />
-                <Route path='/cart' element={<CartPage />} />
-                <Route path='/signup' element={<SignUpPage />} />
-                <Route path='/products' element={<ProductListingPage />} />
-                <Route
-                  path='/products/:id'
-                  element={<ProductDescriptionPage />}
-                />
-                <Route path='/add' element={<DataAdder />} />
-              </Routes>
-            </main>
-            <Footer />
-          </ProductContextProvider>
+          <UserContextProvider>
+            <ProductContextProvider>
+              <Header />
+              <main>
+                <Routes>
+                  <Route path='/' element={<ExplorePage />} />
+                  <Route path='/profile' element={<ProfilePage />} />
+                  <Route path='/signin' element={<SignInPage />} />
+                  <Route path='/cart' element={<CartPage />} />
+                  <Route path='/signup' element={<SignUpPage />} />
+                  <Route path='/products' element={<ProductListingPage />} />
+                  <Route
+                    path='/products/:id'
+                    element={<ProductDescriptionPage />}
+                  />
+                  <Route path='/add' element={<DataAdder />} />
+                </Routes>
+              </main>
+              <Footer />
+            </ProductContextProvider>
+          </UserContextProvider>
         </AuthServiceProvider>
       </Router>
       <ToastContainer

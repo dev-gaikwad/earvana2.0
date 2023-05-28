@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import authHeader from '../utils/authentication/authHeader';
 
 const AuthContext = createContext();
 
@@ -33,7 +34,7 @@ export const AuthServiceProvider = ({ children }) => {
     localStorage.removeItem('token');
     setToken(null);
     setUser(false);
-    toast.info('Logged out successfully');
+    navigate('/');
   };
 
   const signUp = async (username, email, password) => {
@@ -63,8 +64,7 @@ export const AuthServiceProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
-        setToken(token);
-        setUser(true);
+        setToken(response.data);
       }
     } catch (error) {
       if (error.response.status === 403) {
@@ -73,7 +73,6 @@ export const AuthServiceProvider = ({ children }) => {
         setUser(false);
         toast.error('Logged out, Token Expired');
       } else {
-        console.error('Checking error ->', error);
         localStorage.removeItem('token');
         setToken(null);
         setUser(false);
@@ -90,7 +89,9 @@ export const AuthServiceProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut, signUp, token }}>
+    <AuthContext.Provider
+      value={{ user, signIn, signOut, signUp, token, checkTokenValidity }}
+    >
       {children}
     </AuthContext.Provider>
   );

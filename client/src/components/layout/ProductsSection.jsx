@@ -18,7 +18,7 @@ const ProductsSection = () => {
   );
   return (
     <>
-      <div className='products-section-container'>
+      <section className='products-section-container'>
         <div className='products-section-header'>
           <div className='products-section-header-title'>
             <h4>
@@ -55,7 +55,7 @@ const ProductsSection = () => {
             <h2>No products found!</h2>
           )}
         </div>
-      </div>
+      </section>
       {showSmallScreenFilterTab && (
         <SmFiltersTab
           setShowSmallScreenFilterTab={setShowSmallScreenFilterTab}

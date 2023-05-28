@@ -1,16 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import '../../css/ProductCard.css';
 import ratingColorFilter from '../../utils/helper/filters/ratingColorFilter';
+import axios from 'axios';
+import authHeader from '../../utils/authentication/authHeader';
+import { toast } from 'react-toastify';
+import { useUser } from '../../context/UserContext';
+import { useAuth } from '../../context/AuthContext';
 
 const ProductCard = ({ product }) => {
+  const [inCart, setInCart] = useState(false);
+
   const navigate = useNavigate();
 
   const wishlistHandler = () => {
     console.log('wishlist');
   };
-  const cartHandler = () => {};
+  const cartHandler = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/user/cart`,
+        { ...product },
+        { headers: authHeader() }
+      );
+      if (response.status === 200) {
+        toast.success(response.data.message);
+        setInCart(true);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   return (
     <>
@@ -62,9 +83,15 @@ const ProductCard = ({ product }) => {
           <button className='btn-secondary' onClick={wishlistHandler}>
             Add To Wishlist
           </button>
-          <button className='btn-primary' onClick={cartHandler}>
-            Add to Cart
-          </button>
+          {inCart ? (
+            <button className='btn-primary' onClick={() => navigate('/cart')}>
+              View Cart
+            </button>
+          ) : (
+            <button className='btn-primary' onClick={cartHandler}>
+              Add to Cart
+            </button>
+          )}
         </div>
       </article>
     </>

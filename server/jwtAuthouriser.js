@@ -14,7 +14,9 @@ const authorize = async (req, res, next) => {
       async (error, decodedToken) => {
         if (!error) {
           if (decodedToken !== undefined) {
-            if (decodedToken.id === (await getUserById(decodedToken.id))) {
+            if (
+              decodedToken.userId === (await getUserById(decodedToken.userId))
+            ) {
               next();
             } else {
               res.status(401).send({ message: 'Unauthorized' });
@@ -37,11 +39,11 @@ const authorize = async (req, res, next) => {
   }
 };
 
-const getUserById = async (_id) => {
+const getUserById = async (userId) => {
   try {
-    const userDoc = await User.findOne({ _id });
-    const stringID = userDoc._id.toString();
-    return stringID;
+    const userDoc = await User.findOne({ _id: userId });
+    const stringuserId = userDoc._id.toString();
+    return stringuserId;
   } catch (error) {
     console.log('GetById Error -> ', error);
   }

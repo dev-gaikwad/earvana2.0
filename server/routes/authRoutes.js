@@ -39,13 +39,16 @@ router.post('/authenticate', async (req, res) => {
     });
     if (decryptedPassword === password) {
       jwt.sign(
-        { id: userDoc._id, username: userDoc.username },
+        { userId: userDoc._id },
         process.env.JWT_SECRET_KEY,
-        { expiresIn: '1h' },
+        { expiresIn: '10h' },
         (error, token) => {
           if (error) {
             res.status(500).send({ message: 'Unable to generate token' });
-          } else res.status(200).send({ message: 'Login Successful', token });
+          } else
+            res
+              .status(200)
+              .send({ message: 'Login Successful', token, user: userDoc._id });
         }
       );
     } else {
@@ -57,7 +60,8 @@ router.post('/authenticate', async (req, res) => {
   }
 });
 
-router.get('/check-token', authorize, async (req, res) => {
-  res.status(200).send({ message: 'Valid' });
+router.get('/check-token', authorize, (req, res) => {
+  res.status(200).send(req.headers.authorization.split(' ')[1]);
 });
+
 module.exports = router;
