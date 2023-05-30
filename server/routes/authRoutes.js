@@ -8,6 +8,8 @@ const router = express.Router();
 const { encryptPassword, decryptPassword } = require('../encryptionHandler');
 const authorize = require('../jwtAuthouriser');
 
+const decodeJWT = (token) => jwt.decode(token.split(' ')[1]);
+
 router.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
   try {
@@ -30,25 +32,28 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/authenticate', async (req, res) => {
-  const { email, password } = req.body;
+  const { email: inputEmail, password: inputPassword } = req.body;
   try {
-    const userDoc = await User.findOne({ email });
+    const { _id, username, email, password, iv, addresses, cart, wishlist } =
+      await User.findOne({ email: inputEmail });
     const decryptedPassword = decryptPassword({
-      password: userDoc.password,
-      iv: userDoc.iv,
+      password,
+      iv,
     });
-    if (decryptedPassword === password) {
+    if (decryptedPassword === inputPassword) {
       jwt.sign(
-        { userId: userDoc._id },
+        { userId: _id },
         process.env.JWT_SECRET_KEY,
         { expiresIn: '10h' },
         (error, token) => {
           if (error) {
             res.status(500).send({ message: 'Unable to generate token' });
           } else
-            res
-              .status(200)
-              .send({ message: 'Login Successful', token, user: userDoc._id });
+            res.status(200).send({
+              message: 'Login Successful',
+              token,
+              user: { userId: _id, username, email, addresses, cart, wishlist },
+            });
         }
       );
     } else {
@@ -60,8 +65,19 @@ router.post('/authenticate', async (req, res) => {
   }
 });
 
-router.get('/check-token', authorize, (req, res) => {
-  res.status(200).send(req.headers.authorization.split(' ')[1]);
+router.get('/check-token', authorize, async (req, res) => {
+  const { userId } = decodeJWT(req.headers.authorization);
+  User.findOne({ _id: userId })
+    .then(({ _id, username, email, addresses, cart, wishlist }) =>
+      res.status(200).send({
+        message: 'Login Successful',
+        token: req.headers.authorization.split(' ')[1],
+        user: { userId: _id, username, email, addresses, cart, wishlist },
+      })
+    )
+    .catch((error) =>
+      res.status(500).send({ message: 'Internal server error' })
+    );
 });
 
 module.exports = router;

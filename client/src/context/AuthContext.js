@@ -23,7 +23,8 @@ export const AuthServiceProvider = ({ children }) => {
 
       localStorage.setItem('token', response.data.token);
       setToken(response.data.token);
-      setUser(true);
+      console.log(response.data.user);
+      setUser(response.data.user);
       navigate('/');
     } catch (error) {
       toast.error(error.response.data.message);
@@ -33,7 +34,7 @@ export const AuthServiceProvider = ({ children }) => {
   const signOut = () => {
     localStorage.removeItem('token');
     setToken(null);
-    setUser(false);
+    setUser(null);
     navigate('/');
   };
 
@@ -64,13 +65,15 @@ export const AuthServiceProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
-        setToken(response.data);
+        setToken(response.data.token);
+        console.log('after revalidating token ->', response.data.user);
+        setUser(response.data.user);
       }
     } catch (error) {
       if (error.response.status === 403) {
         localStorage.removeItem('token');
         setToken(null);
-        setUser(false);
+        setUser(null);
         toast.error('Logged out, Token Expired');
       } else {
         localStorage.removeItem('token');
@@ -90,7 +93,15 @@ export const AuthServiceProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, signIn, signOut, signUp, token, checkTokenValidity }}
+      value={{
+        user,
+        setUser,
+        signIn,
+        signOut,
+        signUp,
+        token,
+        checkTokenValidity,
+      }}
     >
       {children}
     </AuthContext.Provider>

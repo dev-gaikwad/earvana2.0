@@ -25,16 +25,19 @@ router.get('/cart', authorize, async (req, res) => {
 router.post('/cart', authorize, async (req, res) => {
   const { userId } = decodeJWT(req.headers.authorization);
   try {
-    const product = req.body;
+    const inputProduct = req.body;
     User.findOne({ _id: userId })
       .then((user) => {
         const productIndex = user.cart.findIndex(
-          (item) => item.product_id.toString() === product._id
+          (item) => item.product._id.toString() === inputProduct._id
         );
         if (productIndex !== -1) {
           user.cart[productIndex].quantity += 1;
         } else {
-          user.cart.push({ product_id: product._id, quantity: 1 });
+          user.cart.push({
+            product: { ...inputProduct },
+            quantity: 1,
+          });
         }
         return user.save();
       })
@@ -42,6 +45,7 @@ router.post('/cart', authorize, async (req, res) => {
         res.status(200).send({ message: 'Item added to cart' });
       })
       .catch((error) => {
+        console.log('Adding ewrror -> ', error);
         res.status(400).send({ message: 'Unable to add. Please try later' });
       });
   } catch (error) {

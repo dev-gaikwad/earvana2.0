@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import '../../css/ProductCard.css';
@@ -8,9 +8,21 @@ import authHeader from '../../utils/authentication/authHeader';
 import { toast } from 'react-toastify';
 import { useUser } from '../../context/UserContext';
 import { useAuth } from '../../context/AuthContext';
+import { ProductContext } from '../../context/ProductContext';
 
 const ProductCard = ({ product }) => {
   const [inCart, setInCart] = useState(false);
+
+  const user = useUser();
+  const auth = useAuth();
+  const { getDiscountedPrice } = useContext(ProductContext);
+
+  useEffect(() => {
+    const exists = auth?.user?.cart.some(
+      (item) => item.product._id === product._id
+    );
+    setInCart(exists);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -61,9 +73,9 @@ const ProductCard = ({ product }) => {
               {product.discount ? (
                 <div className='product-price'>
                   <div className='selling-price'>
-                    {Math.floor(product.price - product.price * 0.1)}
+                    {product.price - getDiscountedPrice(product.price)}
                   </div>
-                  <div className='original-price'>{product.price}</div>
+                  <s className='original-price'>{product.price}</s>
                 </div>
               ) : (
                 <div className='product-price'>
@@ -84,7 +96,10 @@ const ProductCard = ({ product }) => {
             Add To Wishlist
           </button>
           {inCart ? (
-            <button className='btn-primary' onClick={() => navigate('/cart')}>
+            <button
+              className='btn-primary btn-view-cart'
+              onClick={() => navigate('/cart')}
+            >
               View Cart
             </button>
           ) : (

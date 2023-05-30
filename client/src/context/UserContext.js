@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const [userCart, setUserCart] = useState([]);
   const auth = useAuth();
 
   const getCart = async () => {
@@ -18,7 +17,7 @@ export const UserContextProvider = ({ children }) => {
           `${process.env.REACT_APP_API_URL}/user/cart`,
           { headers: authHeader() }
         );
-        setUserCart(response.data.cart);
+        auth.setUser((prev) => ({ ...prev, cart: response.data.cart }));
       } catch (error) {
         console.error('Cart Error ->', error);
       }
@@ -29,9 +28,7 @@ export const UserContextProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ getCart, userCart, setUserCart }}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={{ getCart }}>{children}</UserContext.Provider>
   );
 };
 

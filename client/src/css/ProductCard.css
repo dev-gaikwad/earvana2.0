@@ -104,3 +104,10 @@
   justify-content: space-between;
   gap: 0.5rem;
 }
+
+.btn-view-cart {
+  color: var(--primary-contrast-color);
+}
+.btn-view-cart:hover {
+  color: var(--primary-contrast-color);
+}

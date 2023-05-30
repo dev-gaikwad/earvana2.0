@@ -1,0 +1,44 @@
+.cart-summary-container {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+.summary-card-header {
+  text-align: center;
+}
+
+.price-split-container {
+  border-bottom: solid var(--x-light-secondary-color);
+}
+
+.price-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.25rem 0rem;
+}
+
+.free-delivery-price {
+  text-decoration: line-through;
+  text-decoration-color: var(--accent1-color);
+}
+
+.delivery-message-container {
+  color: var(--accent1-color);
+  margin-bottom: 0.5rem;
+}
+
+.delivery-message-container span {
+  font-weight: bold;
+}
+
+.free-delivery {
+  color: var(--accent2-color);
+}
+
+.cart-total {
+  font-weight: bold;
+}

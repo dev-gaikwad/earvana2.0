@@ -35,6 +35,9 @@ export const ProductContextProvider = ({ children }) => {
     }
   };
 
+  const getDiscountedPrice = (price) =>
+    Math.floor((price * Number(process.env.REACT_APP_SITEWIDE_DISCOUNT)) / 100);
+
   const filterAndSortProducts = (products, filters) => {
     const matchedProducts = filterSearchedProducts(
       products,
@@ -66,6 +69,7 @@ export const ProductContextProvider = ({ children }) => {
         dispatch,
         getAllProducts,
         allProducts,
+        getDiscountedPrice,
         isLoading,
         filterAndSortProducts,
         categoryList,
