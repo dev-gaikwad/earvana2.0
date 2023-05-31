@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
       (item) => item.product._id === product._id
     );
 
-    const existsInWishlist = auth?.user.wishlist.some(
+    const existsInWishlist = auth?.user?.wishlist.some(
       (item) => item.product._id === product._id
     );
     setInCart(existsInCart);

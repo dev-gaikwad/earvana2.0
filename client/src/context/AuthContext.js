@@ -61,7 +61,7 @@ export const AuthServiceProvider = ({ children }) => {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/auth/check-token`,
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: authHeader(),
         }
       );
       if (response.status === 200) {
