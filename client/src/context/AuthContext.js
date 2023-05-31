@@ -61,12 +61,12 @@ export const AuthServiceProvider = ({ children }) => {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/auth/check-token`,
         {
-          headers: authHeader(),
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       if (response.status === 200) {
-        setToken(response.data.token);
         console.log('after revalidating token ->', response.data.user);
+        setToken(response.data.token);
         setUser(response.data.user);
       }
     } catch (error) {
