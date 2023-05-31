@@ -14,6 +14,7 @@ const ProfilePage = () => {
   return (
     <div className='profile-page-container'>
       <h1>Profile Page</h1>
+      <button onClick={() => navigate('/wishlist')}>Wishlist</button>
       <button onClick={signOutClickHandler}>Sign Out</button>
     </div>
   );

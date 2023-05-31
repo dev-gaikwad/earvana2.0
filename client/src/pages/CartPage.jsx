@@ -10,16 +10,16 @@ import '../css/CartPage.css';
 const CartPage = () => {
   const user = useUser();
   const auth = useAuth();
-  const { allProducts } = useContext(ProductContext);
 
   useEffect(() => {
     user.getCart();
+    user.getWishlist();
   }, []);
 
   return (
     <div className='cart-page-container'>
       <div className='cart-page-header'>
-        <h3>My Cart ()</h3>
+        <h3>My Cart ({auth?.user?.cart.length})</h3>
       </div>
       <section className='cart-info-section'>
         <div className='cart-products-list-container'>
@@ -31,7 +31,9 @@ const CartPage = () => {
             <h3>No items in your cart</h3>
           )}
         </div>
-        <CartSummary />
+        <div className='cart-summary'>
+          <CartSummary />
+        </div>
       </section>
     </div>
   );

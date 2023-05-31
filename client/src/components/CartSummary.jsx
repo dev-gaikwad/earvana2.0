@@ -25,8 +25,8 @@ const CartSummary = () => {
     { totalItems: 0, totalValue: 0, totalDiscount: 0 }
   );
 
-  const totalAmount = cartSummary?.totalValue - cartSummary?.totalDiscount;
-  const deliveryCharges = totalAmount > 12000 ? 0 : 99;
+  const productAmount = cartSummary?.totalValue - cartSummary?.totalDiscount;
+  const deliveryCharges = productAmount > 12000 ? 0 : 99;
 
   return (
     <>
@@ -59,7 +59,7 @@ const CartSummary = () => {
                 </small>
               ) : (
                 <small>
-                  *Add more products worth <span>₹{12000 - totalAmount}</span>{' '}
+                  *Add more products worth <span>₹{12000 - productAmount}</span>{' '}
                   to avail free delivery
                 </small>
               )}
@@ -67,7 +67,7 @@ const CartSummary = () => {
           </div>
           <div className='price-split cart-total'>
             <p className='price-def'>Total Amount</p>
-            <p className='price'>₹{totalAmount}</p>
+            <p className='price'>₹{productAmount + deliveryCharges}</p>
           </div>
           <div className='applied-offer'></div>
           <button className='btn-primary'>Proceed</button>

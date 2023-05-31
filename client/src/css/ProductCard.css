@@ -9,9 +9,19 @@
   padding: 0.5rem;
 }
 
+.product-image {
+  position: relative;
+}
 .product-image img {
   width: 280px;
   height: 280px;
+}
+
+.product-image .wishlist-button-container {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  z-index: 5;
 }
 
 .product-info-header {

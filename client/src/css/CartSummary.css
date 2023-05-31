@@ -1,9 +1,9 @@
 .cart-summary-container {
-  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 1rem;
+  margin: auto;
 }
 
 .summary-card-header {

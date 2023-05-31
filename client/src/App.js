@@ -16,6 +16,7 @@ import DataAdder from './components/DataAdder';
 import { ProductContextProvider } from './context/ProductContext';
 import ProductDescriptionPage from './pages/ProductDescriptionPage';
 import { UserContextProvider } from './context/UserContext';
+import WishlistPage from './pages/WishlistPage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                   <Route path='/profile' element={<ProfilePage />} />
                   <Route path='/signin' element={<SignInPage />} />
                   <Route path='/cart' element={<CartPage />} />
+                  <Route path='/wishlist' element={<WishlistPage />} />
                   <Route path='/signup' element={<SignUpPage />} />
                   <Route path='/products' element={<ProductListingPage />} />
                   <Route

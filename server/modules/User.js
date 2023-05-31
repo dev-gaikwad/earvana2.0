@@ -17,7 +17,7 @@ const UserSchema = mongoose.Schema({
       quantity: { type: Number, default: 1 },
     },
   ],
-  wishlist: [],
+  wishlist: [{ product: { type: Object, required: true } }],
   created_at: { type: Date, default: Date.now },
 });
 

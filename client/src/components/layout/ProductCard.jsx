@@ -9,50 +9,56 @@ import { toast } from 'react-toastify';
 import { useUser } from '../../context/UserContext';
 import { useAuth } from '../../context/AuthContext';
 import { ProductContext } from '../../context/ProductContext';
+import { HeartIcon } from '../../utils/svg/SVGIcons';
 
 const ProductCard = ({ product }) => {
   const [inCart, setInCart] = useState(false);
+  const [inWishlist, setInWishlist] = useState(false);
 
   const user = useUser();
   const auth = useAuth();
   const { getDiscountedPrice } = useContext(ProductContext);
 
   useEffect(() => {
-    const exists = auth?.user?.cart.some(
+    const existsInCart = auth?.user?.cart.some(
       (item) => item.product._id === product._id
     );
-    setInCart(exists);
+
+    const existsInWishlist = auth?.user.wishlist.some(
+      (item) => item.product._id === product._id
+    );
+    setInCart(existsInCart);
+    setInWishlist(existsInWishlist);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigate = useNavigate();
 
-  const wishlistHandler = () => {
-    console.log('wishlist');
+  const wishlistHandler = (product) => {
+    user.updateWishlist(product);
+    setInWishlist(true);
   };
-  const cartHandler = async () => {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/user/cart`,
-        { ...product },
-        { headers: authHeader() }
-      );
-      if (response.status === 200) {
-        toast.success(response.data.message);
-        setInCart(true);
-      }
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
+  const cartHandler = (product) => {
+    user.addToCart(product);
+    setInCart(true);
   };
 
   return (
     <>
       <article className='product-card'>
-        <div
-          onClick={() => navigate(`/products/${product._id}`)}
-          className='product-image'
-        >
+        <div className='product-image'>
           <img src={product.image_url} alt='product.name' />
+          <div
+            className='wishlist-button-container'
+            onClick={() => wishlistHandler(product)}
+          >
+            <HeartIcon
+              width='24px'
+              height='24px'
+              fill={inWishlist ? 'red' : 'none'}
+            />
+          </div>
         </div>
         <div
           onClick={() => navigate(`/products/${product._id}`)}
@@ -92,9 +98,6 @@ const ProductCard = ({ product }) => {
         </div>
 
         <div className='product-card-buttons-container'>
-          <button className='btn-secondary' onClick={wishlistHandler}>
-            Add To Wishlist
-          </button>
           {inCart ? (
             <button
               className='btn-primary btn-view-cart'
@@ -103,7 +106,10 @@ const ProductCard = ({ product }) => {
               View Cart
             </button>
           ) : (
-            <button className='btn-primary' onClick={cartHandler}>
+            <button
+              className='btn-primary'
+              onClick={() => cartHandler(product)}
+            >
               Add to Cart
             </button>
           )}
