@@ -11,6 +11,7 @@ const productRoutes = require('./routes/productRoutes');
 const authorize = require('./jwtAuthouriser');
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
