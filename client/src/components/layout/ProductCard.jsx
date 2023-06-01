@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
     setInWishlist(existsInWishlist);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [auth.user]);
 
   const navigate = useNavigate();
 

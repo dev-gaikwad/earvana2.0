@@ -7,6 +7,7 @@ import {
   CloseButtonIcon,
   ExploreIcon,
   HamburgerMenuIcon,
+  HeartIcon,
   ProfileIcon,
   SignInIcon,
   SignUpIcon,
@@ -52,103 +53,128 @@ const Navbar = () => {
             </li>
 
             {auth.user ? (
-              <li
-                className='navbar-list-item'
-                onClick={() => navigate('/profile')}
-              >
-                <ProfileIcon
-                  fill={
-                    currentRoute('/profile')
-                      ? 'var(--primary-color)'
-                      : 'var(--x-light-secondary-color)'
-                  }
-                  width='30px'
-                  height='30px'
-                />
-                <p
-                  className={
-                    currentRoute('/profile')
-                      ? 'navbar-list-item-name-active'
-                      : 'navbar-list-item-name'
-                  }
+              <>
+                <li
+                  className='navbar-list-item'
+                  onClick={() => navigate('/profile')}
                 >
-                  Profile
-                </p>
-              </li>
-            ) : (
-              <li
-                className='navbar-list-item'
-                onClick={() => navigate('/signin')}
-              >
-                <SignInIcon
-                  fill={
-                    currentRoute('/signin')
-                      ? 'var(--primary-color)'
-                      : 'var(--x-light-secondary-color)'
-                  }
-                  width='30px'
-                  height='30px'
-                />
-                <p
-                  className={
-                    currentRoute('/signin')
-                      ? 'navbar-list-item-name-active'
-                      : 'navbar-list-item-name'
-                  }
-                >
-                  Sign In
-                </p>
-              </li>
-            )}
+                  <ProfileIcon
+                    fill={
+                      currentRoute('/profile')
+                        ? 'var(--primary-color)'
+                        : 'var(--x-light-secondary-color)'
+                    }
+                    width='30px'
+                    height='30px'
+                  />
+                  <p
+                    className={
+                      currentRoute('/profile')
+                        ? 'navbar-list-item-name-active'
+                        : 'navbar-list-item-name'
+                    }
+                  >
+                    Profile
+                  </p>
+                </li>
 
-            {auth.user ? (
-              <li
-                className='navbar-list-item'
-                onClick={() => navigate('/cart')}
-              >
-                <CartIcon
-                  fill={
-                    currentRoute('/cart')
-                      ? 'var(--primary-color)'
-                      : 'var(--x-light-secondary-color)'
-                  }
-                  width='30px'
-                  height='30px'
-                />
-                <p
-                  className={
-                    currentRoute('/cart')
-                      ? 'navbar-list-item-name-active'
-                      : 'navbar-list-item-name'
-                  }
+                <li
+                  className='navbar-list-item'
+                  onClick={() => navigate('/wishlist')}
                 >
-                  Cart
-                </p>
-              </li>
+                  <HeartIcon
+                    fill={
+                      currentRoute('/wishlist')
+                        ? 'var(--primary-color)'
+                        : 'var(--x-light-secondary-color)'
+                    }
+                    width='30px'
+                    height='30px'
+                  />
+                  <p
+                    className={
+                      currentRoute('/wishlist')
+                        ? 'navbar-list-item-name-active'
+                        : 'navbar-list-item-name'
+                    }
+                  >
+                    Wishlist
+                  </p>
+                </li>
+                <li
+                  className='navbar-list-item'
+                  onClick={() => navigate('/cart')}
+                >
+                  <CartIcon
+                    fill={
+                      currentRoute('/cart')
+                        ? 'var(--primary-color)'
+                        : 'var(--x-light-secondary-color)'
+                    }
+                    width='30px'
+                    height='30px'
+                  />
+                  <p
+                    className={
+                      currentRoute('/cart')
+                        ? 'navbar-list-item-name-active'
+                        : 'navbar-list-item-name'
+                    }
+                  >
+                    Cart
+                  </p>
+                </li>
+              </>
             ) : (
-              <li
-                className='navbar-list-item'
-                onClick={() => navigate('/signup')}
-              >
-                <SignUpIcon
-                  fill={
-                    currentRoute('/signup')
-                      ? 'var(--primary-color)'
-                      : 'var(--x-light-secondary-color)'
-                  }
-                  width='30px'
-                  height='30px'
-                />
-                <p
-                  className={
-                    currentRoute('/signup')
-                      ? 'navbar-list-item-name-active'
-                      : 'navbar-list-item-name'
-                  }
+              <>
+                <li
+                  className='navbar-list-item'
+                  onClick={() => navigate('/signin')}
                 >
-                  Sign Up
-                </p>
-              </li>
+                  <SignInIcon
+                    fill={
+                      currentRoute('/signin')
+                        ? 'var(--primary-color)'
+                        : 'var(--x-light-secondary-color)'
+                    }
+                    width='30px'
+                    height='30px'
+                  />
+                  <p
+                    className={
+                      currentRoute('/signin')
+                        ? 'navbar-list-item-name-active'
+                        : 'navbar-list-item-name'
+                    }
+                  >
+                    Sign In
+                  </p>
+                </li>
+
+                <li
+                  className='navbar-list-item'
+                  onClick={() => navigate('/signup')}
+                >
+                  <SignUpIcon
+                    fill={
+                      currentRoute('/signup')
+                        ? 'var(--primary-color)'
+                        : 'var(--x-light-secondary-color)'
+                    }
+                    width='30px'
+                    height='30px'
+                  />
+                  <p
+                    className={
+                      currentRoute('/signup')
+                        ? 'navbar-list-item-name-active'
+                        : 'navbar-list-item-name'
+                    }
+                  >
+                    Sign Up
+                  </p>
+                </li>
+              </>
             )}
           </ul>
           <div
@@ -185,6 +211,15 @@ const Navbar = () => {
               }}
             >
               Profile
+            </li>
+            <li
+              className='sm-navbar-list-item'
+              onClick={() => {
+                navigate('/wishlist');
+                setDisplayMenu(false);
+              }}
+            >
+              Wishlist
             </li>
             <li
               className='sm-navbar-list-item'

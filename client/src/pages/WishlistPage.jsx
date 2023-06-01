@@ -3,10 +3,12 @@ import { useUser } from '../context/UserContext';
 import { useAuth } from '../context/AuthContext';
 import ProductCard from '../components/layout/ProductCard';
 import '../css/WishlistPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const WishlistPage = () => {
   const user = useUser();
   const auth = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     user.getCart();
@@ -23,7 +25,15 @@ const WishlistPage = () => {
             <ProductCard key={index} product={product} />
           ))
         ) : (
-          <h3>No items in your wishlist</h3>
+          <div className='empty-wishlist'>
+            <h3>No items in your wishlist</h3>
+            <button
+              className='btn-primary'
+              onClick={() => navigate('/products')}
+            >
+              Shop Now
+            </button>
+          </div>
         )}
       </section>
     </div>

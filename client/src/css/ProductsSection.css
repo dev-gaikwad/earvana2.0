@@ -14,7 +14,7 @@
   padding: 0 1.5rem;
 }
 .products-section-header h4,
-p {
+.products-section-container p {
   text-transform: capitalize;
   margin: 0.25rem 0rem;
 }

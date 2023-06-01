@@ -12,14 +12,7 @@ const authorize = require('./jwtAuthouriser');
 
 const app = express();
 
-app.use(
-  cors({
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    origin: 'https://earvana.vercel.app',
-    optionsSuccessStatus: 200,
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 app.use('/auth', authRoutes);

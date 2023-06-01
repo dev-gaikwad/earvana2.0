@@ -4,6 +4,7 @@ import { ProductContext } from '../../context/ProductContext';
 import ProductCard from './ProductCard';
 import { SettingsIcon } from '../../utils/svg/SVGIcons';
 import SmFiltersTab from './SmFiltersTab';
+import LoadingSpinner from './LoadingSpinner';
 
 const ProductsSection = () => {
   const [showSmallScreenFilterTab, setShowSmallScreenFilterTab] =
@@ -44,13 +45,14 @@ const ProductsSection = () => {
             />
           </div>
         </div>
+
         <div className='products-listing'>
           {filteredAndSortedProducts.length ? (
             filteredAndSortedProducts.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))
           ) : isLoading ? (
-            <h1>Loading...</h1>
+            <LoadingSpinner />
           ) : (
             <h2>No products found!</h2>
           )}

@@ -1,0 +1,59 @@
+.user-info-section {
+  max-width: 90%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-info-container {
+  width: 80vw;
+  min-width: 300px;
+  max-width: 500px;
+  border: 0.5px solid var(--x-light-secondary-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-options-container ul {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tab-options-container li {
+  flex: 1 1 auto;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.tab-name-active {
+  font-weight: bold;
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.account-tab {
+  display: none;
+  padding: 1rem;
+}
+
+.account-tab-active {
+  display: block;
+}
+
+.info-content {
+  margin: auto;
+}
+
+.info-label {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.info-label span {
+  font-weight: normal;
+  color: var(--secondary-color);
+}

@@ -19,9 +19,7 @@ const CartProductCard = ({ item }) => {
     setInWishlist(existsInWishlist);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const wishlistHandler = () => {};
+  }, [auth.user]);
 
   return (
     <article className='cart-card-container'>
@@ -56,7 +54,10 @@ const CartProductCard = ({ item }) => {
         </div>
         <div className='product-card-buttons-container'>
           {!inWishList && (
-            <button className='btn-secondary' onClick={wishlistHandler}>
+            <button
+              className='btn-secondary'
+              onClick={() => user.updateWishlist(product)}
+            >
               Add To Wishlist
             </button>
           )}

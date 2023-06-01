@@ -1,8 +1,8 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useUser } from '../context/UserContext';
 import { useAuth } from '../context/AuthContext';
-import { ProductContext } from '../context/ProductContext';
 import CartProductCard from '../components/CartProductCard';
 import CartSummary from '../components/CartSummary';
 import '../css/CartPage.css';
@@ -10,6 +10,7 @@ import '../css/CartPage.css';
 const CartPage = () => {
   const user = useUser();
   const auth = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     user.getCart();
@@ -28,7 +29,15 @@ const CartPage = () => {
               <CartProductCard key={index} item={item} />
             ))
           ) : (
-            <h3>No items in your cart</h3>
+            <div className='empty-cart'>
+              <h3>No items in your cart</h3>
+              <button
+                className='btn-primary'
+                onClick={() => navigate('/products')}
+              >
+                Shop Now
+              </button>
+            </div>
           )}
         </div>
         <div className='cart-summary'>

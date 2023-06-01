@@ -62,6 +62,9 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
+button:disabled {
+  cursor: not-allowed;
+}
 .btn-primary {
   background-color: var(--primary-color);
   color: var(--white);
@@ -71,6 +74,7 @@ button {
   background-color: var(--lighter-primary-color);
   color: var(--white);
 }
+
 .btn-secondary {
   background-color: transparent;
   color: var(--primary-color);
@@ -78,4 +82,14 @@ button {
 }
 .btn-secondary:hover {
   background-color: var(--x-light-primary-color);
+}
+
+.btn-danger {
+  background-color: transparent;
+  color: var(--accent1-color);
+  border: 1px solid var(--accent1-color);
+}
+.btn-danger:hover {
+  background-color: var(--accent1-color);
+  color: var(--white);
 }

@@ -1,15 +1,15 @@
 .cart-page-container {
   width: 100%;
+  min-height: 70vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: relative;
 }
 
 .cart-info-section {
   max-width: 90%;
-  margin: auto;
+  margin: 1rem auto;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:

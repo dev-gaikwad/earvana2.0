@@ -28,6 +28,8 @@ const CartSummary = () => {
   const productAmount = cartSummary?.totalValue - cartSummary?.totalDiscount;
   const deliveryCharges = productAmount > 12000 ? 0 : 99;
 
+  const checkoutHandler = () => {};
+
   return (
     <>
       {cartSummary && (
@@ -70,7 +72,15 @@ const CartSummary = () => {
             <p className='price'>₹{productAmount + deliveryCharges}</p>
           </div>
           <div className='applied-offer'></div>
-          <button className='btn-primary'>Proceed</button>
+          <button
+            className={
+              cartSummary?.totalItems > 0 ? 'btn-primary' : 'btn-secondary'
+            }
+            disabled={cartSummary?.totalItems > 0 ? false : true}
+            onClick={() => checkoutHandler}
+          >
+            Proceed
+          </button>
         </article>
       )}
     </>
