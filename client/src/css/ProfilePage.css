@@ -1,3 +1,6 @@
+.profile-page-container {
+  min-height: 91vh;
+}
 .user-info-section {
   max-width: 90%;
   margin: 1rem auto;
@@ -56,4 +59,26 @@
 .info-label span {
   font-weight: normal;
   color: var(--secondary-color);
+}
+
+.address-card {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border-bottom: 0.5px solid var(--x-light-secondary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.address-card-name {
+  font-weight: bold;
+  margin: 0.25rem;
+}
+
+.address-card-address {
+  font-size: small;
+  margin-bottom: 1rem;
+}
+
+.delete-container {
+  cursor: pointer;
 }

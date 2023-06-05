@@ -1,6 +1,7 @@
 .form-card {
   max-width: 600px;
   margin: 5rem auto;
+  padding: 0.5rem;
 }
 
 .email-input,

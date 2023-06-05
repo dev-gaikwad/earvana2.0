@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState } from 'react';
+import { createContext, useContext } from 'react';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
 import authHeader from '../utils/authentication/authHeader';
@@ -8,6 +8,8 @@ export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
   const auth = useAuth();
+
+  // Cart Functions ---
 
   const getCart = async () => {
     const token = localStorage.getItem('token');
@@ -80,6 +82,8 @@ export const UserContextProvider = ({ children }) => {
     }
   };
 
+  // Wishlist Functions
+
   const getWishlist = async () => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -116,6 +120,72 @@ export const UserContextProvider = ({ children }) => {
       toast.error(error.response.data.message);
     }
   };
+
+  // Address Functions
+
+  const getAddresses = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/user/address`,
+          { headers: authHeader() }
+        );
+        auth.setUser((prev) => ({
+          ...prev,
+          addresses: response.data.addresses,
+        }));
+      } catch (error) {
+        console.error('Wishlist Error ->', error);
+      }
+    } else {
+      toast.error('You need to Sign In first');
+      auth.signOut();
+    }
+  };
+
+  const addAddress = async (address) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/user/addAddress`,
+        { ...address },
+        { headers: authHeader() }
+      );
+      if (response.status === 200) {
+        auth.setUser((prev) => ({
+          ...prev,
+          addresses: response.data.addresses,
+        }));
+        toast.success(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  const deleteAddress = async ({ _id }) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/user/deleteAddress`,
+        {
+          _id,
+        },
+        {
+          headers: authHeader(),
+        }
+      );
+      if (response.status === 200) {
+        auth.setUser((prev) => ({
+          ...prev,
+          addresses: response.data.addresses,
+        }));
+        toast.success(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -125,6 +195,9 @@ export const UserContextProvider = ({ children }) => {
         deleteFromCart,
         getWishlist,
         updateWishlist,
+        getAddresses,
+        addAddress,
+        deleteAddress,
       }}
     >
       {children}

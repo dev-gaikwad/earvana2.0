@@ -31,4 +31,4 @@ mongoose
       console.log('Server running ...');
     });
   })
-  .catch((err) => console.log(error));
+  .catch((error) => console.log(error));

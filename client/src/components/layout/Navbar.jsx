@@ -203,33 +203,58 @@ const Navbar = () => {
             >
               Explore
             </li>
-            <li
-              className='sm-navbar-list-item'
-              onClick={() => {
-                navigate('/profile');
-                setDisplayMenu(false);
-              }}
-            >
-              Profile
-            </li>
-            <li
-              className='sm-navbar-list-item'
-              onClick={() => {
-                navigate('/wishlist');
-                setDisplayMenu(false);
-              }}
-            >
-              Wishlist
-            </li>
-            <li
-              className='sm-navbar-list-item'
-              onClick={() => {
-                navigate('/cart');
-                setDisplayMenu(false);
-              }}
-            >
-              Cart
-            </li>
+            {auth.user ? (
+              <>
+                <li
+                  className='sm-navbar-list-item'
+                  onClick={() => {
+                    navigate('/profile');
+                    setDisplayMenu(false);
+                  }}
+                >
+                  Profile
+                </li>
+                <li
+                  className='sm-navbar-list-item'
+                  onClick={() => {
+                    navigate('/wishlist');
+                    setDisplayMenu(false);
+                  }}
+                >
+                  Wishlist
+                </li>
+                <li
+                  className='sm-navbar-list-item'
+                  onClick={() => {
+                    navigate('/cart');
+                    setDisplayMenu(false);
+                  }}
+                >
+                  Cart
+                </li>
+              </>
+            ) : (
+              <>
+                <li
+                  className='sm-navbar-list-item'
+                  onClick={() => {
+                    navigate('/signin');
+                    setDisplayMenu(false);
+                  }}
+                >
+                  Sign In
+                </li>
+                <li
+                  className='sm-navbar-list-item'
+                  onClick={() => {
+                    navigate('/signup');
+                    setDisplayMenu(false);
+                  }}
+                >
+                  Sign Up
+                </li>
+              </>
+            )}
           </ul>
         </div>
       )}

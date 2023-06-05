@@ -9,7 +9,16 @@ const UserSchema = mongoose.Schema({
   password: { type: String, required: true },
   iv: String,
   addresses: [
-    { line1: String, line2: String, city: String, state: String, zip: Number },
+    {
+      first_name: String,
+      last_name: String,
+      street_name: String,
+      street_address: String,
+      city: String,
+      zip_code: Number,
+      state: String,
+      country: String,
+    },
   ],
   cart: [
     {

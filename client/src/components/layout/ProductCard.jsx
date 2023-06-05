@@ -3,9 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import '../../css/ProductCard.css';
 import ratingColorFilter from '../../utils/helper/filters/ratingColorFilter';
-import axios from 'axios';
-import authHeader from '../../utils/authentication/authHeader';
-import { toast } from 'react-toastify';
 import { useUser } from '../../context/UserContext';
 import { useAuth } from '../../context/AuthContext';
 import { ProductContext } from '../../context/ProductContext';

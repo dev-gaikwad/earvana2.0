@@ -8,6 +8,8 @@ const router = express.Router();
 
 const decodeJWT = (token) => jwt.decode(token.split(' ')[1]);
 
+// Cart routes -----
+
 router.get('/cart', authorize, async (req, res) => {
   const { userId } = decodeJWT(req.headers.authorization);
   try {
@@ -22,7 +24,7 @@ router.get('/cart', authorize, async (req, res) => {
   }
 });
 
-router.post('/addToCart', authorize, async (req, res) => {
+router.post('/addToCart', authorize, (req, res) => {
   const { userId } = decodeJWT(req.headers.authorization);
   try {
     const inputProduct = req.body;
@@ -55,7 +57,7 @@ router.post('/addToCart', authorize, async (req, res) => {
   }
 });
 
-router.post('/updateCart', authorize, async (req, res) => {
+router.post('/updateCart', authorize, (req, res) => {
   const { userId } = decodeJWT(req.headers.authorization);
   try {
     const { product_id } = req.body;
@@ -84,7 +86,7 @@ router.post('/updateCart', authorize, async (req, res) => {
   }
 });
 
-router.post('/deleteFromCart', authorize, async (req, res) => {
+router.post('/deleteFromCart', authorize, (req, res) => {
   const { userId } = decodeJWT(req.headers.authorization);
   try {
     const { product_id } = req.body;
@@ -111,6 +113,8 @@ router.post('/deleteFromCart', authorize, async (req, res) => {
   }
 });
 
+// Wishlist routes -----
+
 router.get('/wishlist', authorize, async (req, res) => {
   const { userId } = decodeJWT(req.headers.authorization);
   try {
@@ -125,7 +129,7 @@ router.get('/wishlist', authorize, async (req, res) => {
   }
 });
 
-router.post('/updateWishlist', authorize, async (req, res) => {
+router.post('/updateWishlist', authorize, (req, res) => {
   const { userId } = decodeJWT(req.headers.authorization);
   try {
     const inputProduct = req.body;
@@ -155,6 +159,81 @@ router.post('/updateWishlist', authorize, async (req, res) => {
       );
   } catch (error) {
     res.status(500).send({ message: 'Internal server error' });
+  }
+});
+
+// Address routes -----
+
+router.get('/address', authorize, async (req, res) => {
+  const { userId } = decodeJWT(req.headers.authorization);
+  try {
+    const user = await User.findOne({ _id: userId });
+    if (user) {
+      res.status(200).send({ addresses: user.addresses });
+    } else {
+      res.status(400).send({ message: 'No User Found' });
+    }
+  } catch (error) {
+    res.status(500).send({ message: 'Internal server error' });
+  }
+});
+
+router.post('/addAddress', authorize, (req, res) => {
+  const { userId } = decodeJWT(req.headers.authorization);
+
+  try {
+    const address = req.body;
+    User.findOne({ _id: userId })
+      .then((user) => {
+        const addressIndex = user.addresses.findIndex(
+          (item) => JSON.stringify(item) === JSON.stringify(address)
+        );
+        if (addressIndex === -1) {
+          user.addresses.push({ ...address });
+        }
+        return user.save();
+      })
+      .then((user) => {
+        res
+          .status(200)
+          .send({ message: 'Address Added', addresses: user.addresses });
+      })
+      .catch(() => {
+        res
+          .status(400)
+          .send({ message: 'Something went wrong. Try again later' });
+      });
+  } catch (error) {
+    res.status(500).send({ message: 'Internal server error' });
+  }
+});
+
+router.post('/deleteAddress', authorize, (req, res) => {
+  const { userId } = decodeJWT(req.headers.authorization);
+  try {
+    const address = req.body;
+    User.findOne({ _id: userId })
+      .then((user) => {
+        const addressIndex = user.addresses.findIndex(
+          (item) => item._id.toString() === address._id
+        );
+        console.log(addressIndex);
+        if (addressIndex !== -1) {
+          user.addresses.splice(addressIndex, 1);
+          return user.save();
+        }
+      })
+      .then((user) =>
+        res
+          .status(200)
+          .send({ message: 'Address deleted', addresses: user.addresses })
+      )
+      .catch((err) => {
+        console.log('err ->', err);
+        res.status(400).send({ message: 'Unable to update addresses' });
+      });
+  } catch (error) {
+    res.status(500).send({ message: 'Something went wrong' });
   }
 });
 
