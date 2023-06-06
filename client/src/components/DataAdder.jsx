@@ -5,21 +5,20 @@ const DataAdder = () => {
   const addData = async () => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/product/add-product`,
-        {
-          // name: 'Bose QuietComfort Earbuds',
-          // brand: 'Bose',
-          // category: 'Audioset',
-          // in_ear: true,
-          // wired: false,
-          // image_url:
-          //   '/images/products/earphones/wireless/bose-quietcomfort-earbuds.jpg',
-          // price: 24990,
-          // discount: false,
-          // rating: 4.6,
-          // description:
-          //   'Enjoy unparalleled noise cancellation and immersive sound with the Bose QuietComfort Earbuds. These true wireless earphones offer superb audio quality, comfortable fit and long battery',
-        }
+        `${process.env.REACT_APP_API_URL}/product/add-product`
+        // {
+        //   name: 'iFi Audio Pro Link',
+        //   brand: 'iFi',
+        //   category: 'Tools',
+        //   in_ear: false,
+        //   wired: true,
+        //   image_url: '/images/products/tools/ifi-audio-pro-link.jpg',
+        //   price: 8999,
+        //   discount: false,
+        //   rating: 4.2,
+        //   description:
+        //     'Experience top-notch audio performance with the iFi Audio Pro Link DAC and Amp. This high-quality device enhances the audio quality of your music system, bringing out the finest details and delivering a truly immersive listening experience.',
+        // }
       );
     } catch (error) {
       console.log(error);

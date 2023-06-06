@@ -20,7 +20,19 @@
   align-items: center;
   margin: 0.25rem 0rem;
 }
+.price-def {
+  text-overflow: ellipsis;
+  margin-right: 0.25rem;
+}
 
+.price {
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+}
+
+.sub-total {
+  border-top: 1px solid var(--x-light-secondary-color);
+}
 .free-delivery-price {
   text-decoration: line-through;
   text-decoration-color: var(--accent1-color);

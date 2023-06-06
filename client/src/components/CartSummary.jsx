@@ -1,10 +1,16 @@
 import { useContext } from 'react';
-import { useAuth } from '../context/AuthContext';
-import '../css/CartSummary.css';
-import { ProductContext } from '../context/ProductContext';
+import { useNavigate } from 'react-router-dom';
 
-const CartSummary = () => {
+import { useAuth } from '../context/AuthContext';
+import { useUser } from '../context/UserContext';
+import { ProductContext } from '../context/ProductContext';
+import '../css/CartSummary.css';
+
+const CartSummary = ({ checkout }) => {
   const auth = useAuth();
+  const user = useUser();
+  const navigate = useNavigate();
+
   const { getDiscountedPrice } = useContext(ProductContext);
 
   const cartSummary = auth.user?.cart.reduce(
@@ -28,18 +34,23 @@ const CartSummary = () => {
   const productAmount = cartSummary?.totalValue - cartSummary?.totalDiscount;
   const deliveryCharges = productAmount > 12000 ? 0 : 99;
 
-  const checkoutHandler = () => {};
-
   return (
     <>
       {cartSummary && (
         <article className='cart-summary-container'>
           <h3 className='summary-card-header'>Cart Details</h3>
           <div className='price-split-container'>
-            <div className='price-split'>
-              <p className='price-def'>
-                Price ({cartSummary.totalItems} X Item)
-              </p>
+            {auth.user?.cart.map(({ product, quantity }) => (
+              <div className='price-split' key={product._id}>
+                <p className='price-def'>
+                  {quantity} X {product.name}
+                </p>
+                <p className='price'>₹{product.price * quantity}</p>
+              </div>
+            ))}
+
+            <div className='price-split sub-total'>
+              <p className='price-def'>Sub Total</p>
               <p className='price'>₹{cartSummary.totalValue}</p>
             </div>
             <div className='price-split'>
@@ -72,15 +83,28 @@ const CartSummary = () => {
             <p className='price'>₹{productAmount + deliveryCharges}</p>
           </div>
           <div className='applied-offer'></div>
-          <button
-            className={
-              cartSummary?.totalItems > 0 ? 'btn-primary' : 'btn-secondary'
-            }
-            disabled={cartSummary?.totalItems > 0 ? false : true}
-            onClick={() => checkoutHandler}
-          >
-            Proceed
-          </button>
+          {checkout ? (
+            <button
+              className='btn-primary'
+              disabled={user.selectedAddress !== null ? false : true}
+              onClick={() => {
+                user.placeOrder();
+                navigate('/profile');
+              }}
+            >
+              Place Order
+            </button>
+          ) : (
+            <button
+              className={
+                cartSummary?.totalItems > 0 ? 'btn-primary' : 'btn-secondary'
+              }
+              disabled={cartSummary?.totalItems > 0 ? false : true}
+              onClick={() => navigate('/checkout')}
+            >
+              Proceed
+            </button>
+          )}
         </article>
       )}
     </>

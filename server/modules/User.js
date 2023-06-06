@@ -27,6 +27,7 @@ const UserSchema = mongoose.Schema({
     },
   ],
   wishlist: [{ product: { type: Object, required: true } }],
+  orders: [{ address: { type: Object }, cart: [] }],
   created_at: { type: Date, default: Date.now },
 });
 

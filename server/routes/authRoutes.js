@@ -34,8 +34,17 @@ router.post('/register', async (req, res) => {
 router.post('/authenticate', async (req, res) => {
   const { email: inputEmail, password: inputPassword } = req.body;
   try {
-    const { _id, username, email, password, iv, addresses, cart, wishlist } =
-      await User.findOne({ email: inputEmail });
+    const {
+      _id,
+      username,
+      email,
+      password,
+      iv,
+      addresses,
+      cart,
+      wishlist,
+      orders,
+    } = await User.findOne({ email: inputEmail });
     const decryptedPassword = decryptPassword({
       password,
       iv,
@@ -52,7 +61,15 @@ router.post('/authenticate', async (req, res) => {
             res.status(200).send({
               message: 'Login Successful',
               token,
-              user: { userId: _id, username, email, addresses, cart, wishlist },
+              user: {
+                userId: _id,
+                username,
+                email,
+                addresses,
+                cart,
+                wishlist,
+                orders,
+              },
             });
         }
       );
@@ -68,11 +85,19 @@ router.post('/authenticate', async (req, res) => {
 router.get('/check-token', authorize, async (req, res) => {
   const { userId } = decodeJWT(req.headers.authorization);
   User.findOne({ _id: userId })
-    .then(({ _id, username, email, addresses, cart, wishlist }) =>
+    .then(({ _id, username, email, addresses, cart, wishlist, orders }) =>
       res.status(200).send({
         message: 'Login Successful',
         token: req.headers.authorization.split(' ')[1],
-        user: { userId: _id, username, email, addresses, cart, wishlist },
+        user: {
+          userId: _id,
+          username,
+          email,
+          addresses,
+          cart,
+          wishlist,
+          orders,
+        },
       })
     )
     .catch((error) =>

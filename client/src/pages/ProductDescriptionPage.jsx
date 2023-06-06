@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ProductContext } from '../context/ProductContext';
@@ -6,8 +6,12 @@ import ratingColorFilter from '../utils/helper/filters/ratingColorFilter';
 import '../css/ProductDescriptionPage.css';
 
 const ProductDescriptionPage = () => {
-  const { allProducts } = useContext(ProductContext);
+  const { allProducts, getAllProducts } = useContext(ProductContext);
   const { id } = useParams();
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
 
   const productToBeDescribed = allProducts.find(
     (product) => product._id === id

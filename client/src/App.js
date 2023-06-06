@@ -17,6 +17,7 @@ import { ProductContextProvider } from './context/ProductContext';
 import ProductDescriptionPage from './pages/ProductDescriptionPage';
 import { UserContextProvider } from './context/UserContext';
 import WishlistPage from './pages/WishlistPage';
+import CheckoutPage from './pages/CheckoutPage';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
                   <Route path='/wishlist' element={<WishlistPage />} />
                   <Route path='/signup' element={<SignUpPage />} />
                   <Route path='/products' element={<ProductListingPage />} />
+                  <Route path='/checkout' element={<CheckoutPage />} />
                   <Route
                     path='/products/:id'
                     element={<ProductDescriptionPage />}

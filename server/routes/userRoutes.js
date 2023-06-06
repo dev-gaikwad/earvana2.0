@@ -237,4 +237,36 @@ router.post('/deleteAddress', authorize, (req, res) => {
   }
 });
 
+// Order routes
+
+router.post('/order', authorize, async (req, res) => {
+  const { userId } = decodeJWT(req.headers.authorization);
+
+  try {
+    const inputOrder = req.body;
+    User.findOne({ _id: userId })
+      .then((user) => {
+        const orderDetails = {
+          address: { ...inputOrder.address },
+          cart: [...inputOrder.cart],
+        };
+        user.orders.push(orderDetails);
+        user.cart = [];
+
+        return user.save();
+      })
+      .then((user) =>
+        res
+          .status(200)
+          .send({ message: 'Order placed successfully', orders: user.orders })
+      )
+      .catch((error) => {
+        console.log('err ->', error);
+        res.status(400).send({ message: 'Unable to update addresses' });
+      });
+  } catch (error) {
+    res.status(500).send({ message: 'Something went wrong' });
+  }
+});
+
 module.exports = router;

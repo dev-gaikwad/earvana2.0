@@ -1,13 +1,17 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import { useAuth } from './AuthContext';
 import authHeader from '../utils/authentication/authHeader';
-import { toast } from 'react-toastify';
 
 export const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const auth = useAuth();
+  const navigate = useNavigate();
 
   // Cart Functions ---
 
@@ -186,9 +190,40 @@ export const UserContextProvider = ({ children }) => {
     }
   };
 
+  // place Order
+
+  const placeOrder = () => {
+    try {
+      console.log(selectedAddress);
+      const response = axios.post(
+        `${process.env.REACT_APP_API_URL}/user/order`,
+        {
+          address: selectedAddress,
+          cart: auth.user.cart,
+        },
+        {
+          headers: authHeader(),
+        }
+      );
+      if (response.status === 200) {
+        auth.setUser((prev) => ({
+          ...prev,
+          orders: response.data.orders,
+          cart: [],
+        }));
+        toast.success(response.data.message);
+        navigate('/profile');
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
+        selectedAddress,
+        setSelectedAddress,
         getCart,
         addToCart,
         updateCart,
@@ -198,6 +233,7 @@ export const UserContextProvider = ({ children }) => {
         getAddresses,
         addAddress,
         deleteAddress,
+        placeOrder,
       }}
     >
       {children}
