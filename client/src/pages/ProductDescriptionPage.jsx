@@ -18,7 +18,7 @@ const ProductDescriptionPage = () => {
   const productToBeDescribed = allProducts.find(
     (product) => product._id === id
   );
-  console.log(productToBeDescribed);
+
   return (
     <>
       {productToBeDescribed && (

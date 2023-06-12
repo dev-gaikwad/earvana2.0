@@ -195,7 +195,6 @@ export const UserContextProvider = ({ children }) => {
 
   const placeOrder = () => {
     try {
-      console.log(selectedAddress);
       const response = axios.post(
         `${process.env.REACT_APP_API_URL}/user/order`,
         {

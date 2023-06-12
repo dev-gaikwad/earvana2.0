@@ -23,7 +23,6 @@ export const AuthServiceProvider = ({ children }) => {
 
       localStorage.setItem('token', response.data.token);
       setToken(response.data.token);
-      console.log(response.data.user);
       setUser(response.data.user);
       navigate('/');
     } catch (error) {
@@ -65,7 +64,6 @@ export const AuthServiceProvider = ({ children }) => {
         }
       );
       if (response.status === 200) {
-        console.log('after revalidating token ->', response.data.user);
         setToken(response.data.token);
         setUser(response.data.user);
       }
