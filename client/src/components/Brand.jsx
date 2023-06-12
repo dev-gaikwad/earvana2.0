@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/Brand.css';
+import '../css/Brand.css';
 
 const Brand = ({ name, tagline }) => {
   return (

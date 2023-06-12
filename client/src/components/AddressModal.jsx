@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-import { useUser } from '../../context/UserContext';
-import { CloseButtonIcon } from '../../utils/svg/SVGIcons';
-import '../../css/AddressModal.css';
+import { useUser } from '../context/UserContext';
+import { CloseButtonIcon } from '../utils/svg/SVGIcons';
+import '../css/AddressModal.css';
 
 const AddressModal = ({ setShowAddressModal }) => {
   const [addressFormData, setAddressFormData] = useState({

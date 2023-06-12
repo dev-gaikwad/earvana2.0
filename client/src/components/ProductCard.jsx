@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import '../../css/ProductCard.css';
-import ratingColorFilter from '../../utils/helper/filters/ratingColorFilter';
-import { useUser } from '../../context/UserContext';
-import { useAuth } from '../../context/AuthContext';
-import { ProductContext } from '../../context/ProductContext';
-import { HeartIcon } from '../../utils/svg/SVGIcons';
+import '../css/ProductCard.css';
+import ratingColorFilter from '../utils/helper/filters/ratingColorFilter';
+import { useUser } from '../context/UserContext';
+import { useAuth } from '../context/AuthContext';
+import { ProductContext } from '../context/ProductContext';
+import { HeartIcon } from '../utils/svg/SVGIcons';
 
 const ProductCard = ({ product }) => {
   const [inCart, setInCart] = useState(false);

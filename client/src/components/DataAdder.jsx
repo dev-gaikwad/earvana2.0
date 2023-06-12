@@ -1,3 +1,5 @@
+// This is a temporary page to add new products to the database
+
 import axios from 'axios';
 import React, { useEffect } from 'react';
 
@@ -20,6 +22,7 @@ const DataAdder = () => {
         //     'Experience top-notch audio performance with the iFi Audio Pro Link DAC and Amp. This high-quality device enhances the audio quality of your music system, bringing out the finest details and delivering a truly immersive listening experience.',
         // }
       );
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }

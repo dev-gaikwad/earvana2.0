@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
-import AddressModal from '../components/layout/AddressModal';
+import AddressModal from '../components/AddressModal';
 import '../css/ProfilePage.css';
 import { DeleteBinIcon } from '../utils/svg/SVGIcons';
 
@@ -15,6 +15,8 @@ const ProfilePage = () => {
 
   useEffect(() => {
     user.getAddresses();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

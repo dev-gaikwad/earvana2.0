@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useUser } from '../context/UserContext';
 import { useAuth } from '../context/AuthContext';
-import ProductCard from '../components/layout/ProductCard';
+import ProductCard from '../components/ProductCard';
 import '../css/WishlistPage.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +13,8 @@ const WishlistPage = () => {
   useEffect(() => {
     user.getCart();
     user.getWishlist();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className='wishlist-page-container'>

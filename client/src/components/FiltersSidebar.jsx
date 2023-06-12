@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import '../../css/Filters.css';
-import { ProductContext } from '../../context/ProductContext';
+import '../css/Filters.css';
+import { ProductContext } from '../context/ProductContext';
 
 const FiltersSidebar = () => {
   const { state, dispatch, categoryList, accessoriesList } =

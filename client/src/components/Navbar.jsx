@@ -11,9 +11,9 @@ import {
   ProfileIcon,
   SignInIcon,
   SignUpIcon,
-} from '../../utils/svg/SVGIcons';
-import '../../css/Navbar.css';
-import { useAuth } from '../../context/AuthContext';
+} from '../utils/svg/SVGIcons';
+import '../css/Navbar.css';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
   const [displayMenu, setDisplayMenu] = useState(false);

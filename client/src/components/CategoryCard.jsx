@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
-import '../../css/CategoryCard.css';
-import { ProductContext } from '../../context/ProductContext';
+import '../css/CategoryCard.css';
+import { ProductContext } from '../context/ProductContext';
 import { useNavigate } from 'react-router-dom';
 
 const CategoryCard = ({ SVGIcon, description, accessory, categories }) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryCard from './layout/CategoryCard';
+import CategoryCard from './CategoryCard';
 import '../css/CategoryListSection.css';
 import {
   WiredEarphonesIcon,

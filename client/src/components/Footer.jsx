@@ -1,11 +1,11 @@
 import React from 'react';
-import '../../css/Footer.css';
+import '../css/Footer.css';
 
 import {
   GithubIcon,
   LinkedInIcon,
   WebsiteURLIcon,
-} from '../../utils/svg/SVGIcons';
+} from '../utils/svg/SVGIcons';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

@@ -1,7 +1,7 @@
 import React from 'react';
-import '../../css/SmFiltersTab.css';
+import '../css/SmFiltersTab.css';
 import FiltersSidebar from './FiltersSidebar';
-import { CloseButtonIcon } from '../../utils/svg/SVGIcons';
+import { CloseButtonIcon } from '../utils/svg/SVGIcons';
 
 const SmFiltersTab = ({ setShowSmallScreenFilterTab }) => {
   return (

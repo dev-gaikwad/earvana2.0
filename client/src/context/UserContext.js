@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useAuth } from './AuthContext';
@@ -11,7 +10,6 @@ export const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const auth = useAuth();
-  const navigate = useNavigate();
 
   // Cart Functions ---
 
@@ -42,6 +40,7 @@ export const UserContextProvider = ({ children }) => {
       );
       if (response.status === 200) {
         auth.setUser((prev) => ({ ...prev, cart: response.data.cart }));
+        toast.success('Item added to cart');
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -80,6 +79,7 @@ export const UserContextProvider = ({ children }) => {
       );
       if (response.status === 200) {
         auth.setUser((prev) => ({ ...prev, cart: response.data.cart }));
+        toast.success('Removed from cart');
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -119,6 +119,7 @@ export const UserContextProvider = ({ children }) => {
       );
       if (response.status === 200) {
         auth.setUser((prev) => ({ ...prev, wishlist: response.data.wishlist }));
+        toast.success('Wishlist updated');
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -212,7 +213,6 @@ export const UserContextProvider = ({ children }) => {
           cart: [],
         }));
         toast.success(response.data.message);
-        navigate('/profile');
       }
     } catch (error) {
       toast.error(error);

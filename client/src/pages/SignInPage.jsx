@@ -81,9 +81,10 @@ const SignInPage = () => {
             </div>
           </div>
 
-          <Link to='/forgot-password' className='forgot-password-link'>
+          {/* Task : Complete the execution for forgot password */}
+          {/* <Link to='/forgot-password' className='forgot-password-link'>
             Forgot Password?
-          </Link>
+          </Link> */}
           <div className='button-container'>
             <button type='submit' className='sign-btn'>
               Sign In

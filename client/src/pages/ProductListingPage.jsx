@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import FiltersSidebar from '../components/layout/FiltersSidebar';
-import ProductsSection from '../components/layout/ProductsSection';
+import FiltersSidebar from '../components/FiltersSidebar';
+import ProductsSection from '../components/ProductsSection';
 import { ProductContext } from '../context/ProductContext';
 
 import '../css/ProductsListingPage.css';

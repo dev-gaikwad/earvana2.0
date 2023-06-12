@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
-import '../../css/ProductsSection.css';
-import { ProductContext } from '../../context/ProductContext';
+import '../css/ProductsSection.css';
+import { ProductContext } from '../context/ProductContext';
 import ProductCard from './ProductCard';
-import { SettingsIcon } from '../../utils/svg/SVGIcons';
+import { SettingsIcon } from '../utils/svg/SVGIcons';
 import SmFiltersTab from './SmFiltersTab';
 import LoadingSpinner from './LoadingSpinner';
 

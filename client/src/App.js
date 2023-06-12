@@ -8,7 +8,7 @@ import ProfilePage from './pages/ProfilePage';
 import SignInPage from './pages/SignInPage';
 import CartPage from './pages/CartPage';
 import SignUpPage from './pages/SignUpPage';
-import Footer from './components/layout/Footer';
+import Footer from './components/Footer';
 import { AuthServiceProvider } from './context/AuthContext';
 import ProductListingPage from './pages/ProductListingPage';
 

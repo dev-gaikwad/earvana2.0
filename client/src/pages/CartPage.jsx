@@ -15,6 +15,8 @@ const CartPage = () => {
   useEffect(() => {
     user.getCart();
     user.getWishlist();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
