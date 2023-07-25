@@ -9,15 +9,18 @@ import { DeleteBinIcon } from '../utils/svg/SVGIcons';
 const ProfilePage = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [showAddressModal, setShowAddressModal] = useState(false);
+  const [ordersList, setOrdersList] = useState([]);
 
   const auth = useAuth();
   const user = useUser();
 
   useEffect(() => {
     user.getAddresses();
-
+    if (auth.user?.orders?.length) {
+      setOrdersList(auth.user?.orders?.map((order) => order));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [auth.user?.orders?.length]);
 
   return (
     <div className='profile-page-container'>
@@ -121,32 +124,35 @@ const ProfilePage = () => {
               }`}
             >
               <div className='info-content' id='orders'>
-                {auth.user?.orders?.length ? (
-                  auth.user?.orders?.map((order) => (
-                    <div key={order._id} className='order-card'>
-                      <div className='order-products'>
-                        {order.cart.map((item) => (
-                          <p key={item._id}>
-                            {item.product.name} X {item.quantity}
+                {ordersList && ordersList.length ? (
+                  <>
+                    <small className='refresh-msg'>Refresh to update </small>
+                    {ordersList.map((order) => (
+                      <div key={order._id} className='order-card'>
+                        <div className='order-products'>
+                          {order.cart.map((item) => (
+                            <p key={item._id}>
+                              {item.product.name} X {item.quantity}
+                            </p>
+                          ))}
+                        </div>
+                        <div className='order-address'>
+                          <p className='order-card-address'>
+                            Ordered By :
+                            <span>
+                              {' '}
+                              {order?.address?.first_name}{' '}
+                              {order?.address?.last_name}{' '}
+                              <small>
+                                {order.address?.street_name},
+                                {order.address?.zip_code}
+                              </small>
+                            </span>
                           </p>
-                        ))}
+                        </div>
                       </div>
-                      <div className='order-address'>
-                        <p className='order-card-address'>
-                          Ordered By :
-                          <span>
-                            {' '}
-                            {order?.address?.first_name}{' '}
-                            {order?.address?.last_name}{' '}
-                            <small>
-                              {order.address?.street_name},
-                              {order.address?.zip_code}
-                            </small>
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                  ))
+                    ))}
+                  </>
                 ) : (
                   <p>No order history</p>
                 )}

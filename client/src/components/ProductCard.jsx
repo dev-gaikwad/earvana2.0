@@ -34,11 +34,11 @@ const ProductCard = ({ product }) => {
 
   const wishlistHandler = (product) => {
     user.updateWishlist(product);
-    setInWishlist(true);
+    // setInWishlist(true);
   };
   const cartHandler = (product) => {
     user.addToCart(product);
-    setInCart(true);
+    // setInCart(true);
   };
 
   return (

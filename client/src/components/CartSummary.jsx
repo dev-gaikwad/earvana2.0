@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { useUser } from '../context/UserContext';
 import { ProductContext } from '../context/ProductContext';
 import '../css/CartSummary.css';
+import { toast } from 'react-toastify';
 
 const CartSummary = ({ checkout }) => {
   const auth = useAuth();
@@ -89,7 +90,8 @@ const CartSummary = ({ checkout }) => {
               disabled={user.selectedAddress !== null ? false : true}
               onClick={() => {
                 user.placeOrder();
-                navigate('/profile');
+                toast.success('Order placed successfully');
+                navigate('/products');
               }}
             >
               Place Order

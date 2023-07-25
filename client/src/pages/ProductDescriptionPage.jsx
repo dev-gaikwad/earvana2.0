@@ -1,17 +1,24 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ProductContext } from '../context/ProductContext';
 import ratingColorFilter from '../utils/helper/filters/ratingColorFilter';
 import '../css/ProductDescriptionPage.css';
+import { useUser } from '../context/UserContext';
+import { useAuth } from '../context/AuthContext';
 
 const ProductDescriptionPage = () => {
+  const [inCart, setInCart] = useState(false);
+  const [inWishlist, setInWishlist] = useState(false);
+
   const { allProducts, getAllProducts } = useContext(ProductContext);
   const { id } = useParams();
 
+  const user = useUser();
+  const auth = useAuth();
+
   useEffect(() => {
     getAllProducts();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -19,6 +26,14 @@ const ProductDescriptionPage = () => {
     (product) => product._id === id
   );
 
+  const wishlistHandler = (product) => {
+    user.updateWishlist(product);
+    setInWishlist(true);
+  };
+  const cartHandler = (product) => {
+    user.addToCart(product);
+    setInCart(true);
+  };
   return (
     <>
       {productToBeDescribed && (
@@ -59,8 +74,18 @@ const ProductDescriptionPage = () => {
               {productToBeDescribed.rating}
             </div>
             <div className='product-card-buttons-container'>
-              <button className='btn-secondary'>Add To Wishlist</button>
-              <button className='btn-primary'>Add to Cart</button>
+              <button
+                className='btn-secondary'
+                onClick={() => wishlistHandler(productToBeDescribed)}
+              >
+                Add To Wishlist
+              </button>
+              <button
+                className='btn-primary'
+                onClick={() => cartHandler(productToBeDescribed)}
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
         </article>
